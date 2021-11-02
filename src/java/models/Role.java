@@ -10,13 +10,14 @@ package models;
  * @author 849961
  */
 public class Role {
+
     private int roleID;
     private String roleName;
-    
+
     public Role() {
-        }
-    
-    public Role(int roleID, String roleName){
+    }
+
+    public Role(int roleID, String roleName) {
         this.roleID = roleID;
         this.roleName = roleName;
     }
@@ -36,7 +37,5 @@ public class Role {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
-    
-    
-    
+
 }

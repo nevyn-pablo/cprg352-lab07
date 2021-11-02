@@ -13,28 +13,28 @@ import java.util.List;
 import models.Role;
 import models.User;
 
-
 /**
  *
  * @author 849961
  */
 public class RoleDB {
+
     public List<Role> getAll() throws Exception {
         List<Role> roles = new ArrayList<>();
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection c = cp.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         String sql = "SELECT * FROM role";
-        
+
         try {
             ps = c.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int role_id = rs.getInt(1);
                 String role_name = rs.getString(2);
-                Role role = new Role(role_id,role_name);
+                Role role = new Role(role_id, role_name);
                 roles.add(role);
             }
         } finally {

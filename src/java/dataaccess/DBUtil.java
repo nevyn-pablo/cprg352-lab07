@@ -6,28 +6,30 @@
 package dataaccess;
 
 import java.sql.*;
+
 /**
  *
  * @author 849961
  */
 public class DBUtil {
-    public static void closePreparedStatement(Statement ps){
-        try{
-            if(ps != null){
+
+    public static void closePreparedStatement(Statement ps) {
+        try {
+            if (ps != null) {
                 ps.close();
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
-    
-    public static void closeResultSet(ResultSet rs){
-        try{
-            if(rs != null){
+
+    public static void closeResultSet(ResultSet rs) {
+        try {
+            if (rs != null) {
                 rs.close();
-                
+
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
