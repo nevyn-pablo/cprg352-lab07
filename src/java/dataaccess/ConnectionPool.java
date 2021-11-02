@@ -15,7 +15,6 @@ import java.sql.*;
  * @author 849961
  */
 public class ConnectionPool {
-
     private static ConnectionPool pool = null;
     private static DataSource dataSource = null;
 

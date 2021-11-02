@@ -10,7 +10,6 @@ package models;
  * @author 849961
  */
 public class User {
-
     private String email;
     private int active;
     private String first_name;
@@ -77,5 +76,5 @@ public class User {
     public void setRole(int role) {
         this.role = role;
     }
-
+    
 }

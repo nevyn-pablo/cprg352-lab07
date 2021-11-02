@@ -36,7 +36,8 @@ public class UserServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         //Get: url getrequest, action=edit getrequest,action=delete getrequest , action=cancel getrequest
         UserService us = new UserService();
         RoleService rs = new RoleService();
@@ -44,21 +45,26 @@ public class UserServlet extends HttpServlet {
         try {
             // Read the action
             String operation = request.getParameter("action");
-            if (operation != null && operation.equals("edit")) {
+            if( operation != null && operation.equals("edit"))
+            {
                 // Action: select a user to edit
                 System.out.println("action:edit");
                 String email = request.getParameter("email");
-                String email_r = email.replaceAll(" ", "+");
+                String email_r = email.replaceAll(" ","+");
                 User edit_user = us.get(email_r);
-                request.setAttribute("edit_user", edit_user);
-                request.setAttribute("edit_enable", "true");
-            } else if (operation != null && operation.equals("delete")) {
+                request.setAttribute("edit_user",edit_user);
+                request.setAttribute("edit_enable","true");
+            }
+            else if( operation != null && operation.equals("delete"))
+            {
                 // Action: delete a user
                 System.out.println("action: delete");
                 String email = request.getParameter("email");
-                String email_r = email.replaceAll(" ", "+");
+                String email_r = email.replaceAll(" ","+");
                 us.delete(email_r);
-            } else if (operation != null && operation.equals("cancel")) {
+            }
+            else if( operation != null && operation.equals("cancel"))
+            {
                 // Action: cancel edit user mode
                 System.out.println("action: cancel");
             }
@@ -66,11 +72,12 @@ public class UserServlet extends HttpServlet {
             List<User> users = us.getAll();
             List<Role> roles = rs.getAll();
             request.setAttribute("users", users);
-            request.setAttribute("roles", roles);
-        } catch (Exception e) {
+            request.setAttribute("roles",roles);
+        } catch (Exception ex) {
             request.setAttribute("message", "error");
         }
-        getServletContext().getRequestDispatcher("/WEB-INF/user.jsp").forward(request, response);
+        
+        getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request,response);
     }
 
     /**
@@ -82,42 +89,47 @@ public class UserServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         //Post: action=save postrequest, action=saveedit postrequest
         UserService us = new UserService();
         RoleService rs = new RoleService();
         HttpSession session = request.getSession();
-        try {
+        try 
+        {
             // Read the aciton
             String operation = request.getParameter("action");
-            if (operation != null && operation.equals("save")) {
+            if( operation != null && operation.equals("save"))
+            {
                 // Action: save a new user
                 System.out.println("post: save");
-                us.insert(request.getParameter("email"), Integer.parseInt(request.getParameter("active")),
-                        request.getParameter("firstname"), request.getParameter("lastname"),
-                        request.getParameter("password"), Integer.parseInt(request.getParameter("role")));
-            } else if (operation != null && operation.equals("saveedit")) {
+                us.insert(request.getParameter("email"),Integer.parseInt(request.getParameter("active")),
+                            request.getParameter("firstname"),request.getParameter("lastname"),
+                            request.getParameter("password"),Integer.parseInt(request.getParameter("role")));
+            }
+            else if( operation != null && operation.equals("saveedit"))
+            {
                 // Action: save a edited user
                 System.out.println("post: saveedit");
-                System.out.printf("%s %s %s %s %s %s", request.getParameter("email"), request.getParameter("active"),
-                        request.getParameter("firstname"), request.getParameter("lastname"),
-                        request.getParameter("password"), request.getParameter("role"));
-                us.update(request.getParameter("email"), Integer.parseInt(request.getParameter("active")),
-                        request.getParameter("firstname"), request.getParameter("lastname"),
-                        request.getParameter("password"), Integer.parseInt(request.getParameter("role")));
+                System.out.printf("%s %s %s %s %s %s",request.getParameter("email"),request.getParameter("active"),
+                        request.getParameter("firstname"),request.getParameter("lastname"),
+                        request.getParameter("password"),request.getParameter("role"));
+                us.update(request.getParameter("email"),Integer.parseInt(request.getParameter("active")),
+                            request.getParameter("firstname"),request.getParameter("lastname"),
+                            request.getParameter("password"),Integer.parseInt(request.getParameter("role")));
             }
             // Get all users information from database
             List<User> users = us.getAll();
             List<Role> roles = rs.getAll();
             request.setAttribute("users", users);
-            request.setAttribute("roles", roles);
-
-        } catch (Exception e) {
+            request.setAttribute("roles",roles);
+                
+        }catch (Exception ex) {
             System.out.println("post went wrong");
             request.setAttribute("message", "error");
         }
-        getServletContext().getRequestDispatcher("/WEB-INF/user.jsp").forward(request, response);
-
+        getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request,response);
+  
     }
 
 }

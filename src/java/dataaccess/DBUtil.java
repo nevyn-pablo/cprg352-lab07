@@ -12,7 +12,6 @@ import java.sql.*;
  * @author 849961
  */
 public class DBUtil {
-
     public static void closePreparedStatement(Statement ps) {
         try {
             if (ps != null) {
@@ -27,7 +26,6 @@ public class DBUtil {
         try {
             if (rs != null) {
                 rs.close();
-
             }
         } catch (SQLException e) {
             System.out.println(e);

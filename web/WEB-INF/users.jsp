@@ -1,9 +1,8 @@
 <%-- 
-    Document   : users
+    Document   : user
     Created on : Nov 2, 2021, 11:36:43 AM
     Author     : 849961
 --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
